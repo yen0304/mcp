@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run Current TS File",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${file}",
+      "runtimeArgs": [
+        "--loader",
+        "ts-node/esm"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/dist/**/*.js"
+      ],
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Main.ts",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node-dev",
+      "args": [
+      "--respawn",
+      "--transpile-only",
+      ],
+      "skipFiles": [
+      "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/main.ts",
+    },    {
+      "type": "node",
+      "request": "launch",
+      "name": "Client.ts",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ts-node-dev",
+      "args": [
+      "--respawn",
+      "--transpile-only",
+      ],
+      "skipFiles": [
+      "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/main.ts",
+    }
+  ]
+}
