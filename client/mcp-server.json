@@ -2,7 +2,7 @@
     "servers": [
       {
         "name": "weather",
-        "path": "./servers/dist/src/weather.js",
+        "path": "../server/build/weather.js",
         "description": "天氣問答伺服器"
       }
     ]
