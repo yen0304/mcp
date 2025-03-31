@@ -4,13 +4,15 @@
     "weather": "./build/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod 755 build/weather.js"
+    "build": "tsc && chmod 755 build/*"
   },
   "files": [
     "build"
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.8.0",
+    "@playwright/mcp": "^0.0.7",
+    "@playwright/test": "^1.51.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {

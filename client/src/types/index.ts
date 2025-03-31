@@ -5,7 +5,9 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 interface ServerConfig {
   name: string;
   path: string;
-  description: string;
+  description?: string;
+  command: 'npx' | 'python' | 'node';
+  args?: string[];
 }
 
 interface Config {

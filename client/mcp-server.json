@@ -4,6 +4,12 @@
         "name": "weather",
         "path": "../server/build/weather.js",
         "description": "Weather API"
+      },
+      {
+        "name": "playwright",
+        "description": "Playwright Browser Automation",
+        "command": "npx",
+        "args": ["@playwright/mcp@latest"]
       }
     ]
   }

@@ -42,19 +42,23 @@ class MCPClient {
 
   private async connectToServer(serverConfig: ServerConfig) {
     try {
-      const serverPath = path.resolve(process.cwd(), serverConfig.path);
-      const isJs = serverPath.endsWith('.js');
-      const isPy = serverPath.endsWith('.py');
+      let command: string;
+      let args: string[] = [];
+      if (serverConfig.command === 'npx') {
+        command = 'npx';
+        args = [...(serverConfig.args || [])];
+      } else {
+        const serverPath = path.resolve(process.cwd(), serverConfig.path);
+        const isJs = serverPath.endsWith('.js');
+        const isPy = serverPath.endsWith('.py');
 
-      if (!isJs && !isPy) {
-        throw new Error('Server script must be a .js or .py file');
+        if (!isJs && !isPy) {
+          throw new Error('Server script must be a .js or .py file');
+        }
+
+        command = isPy ? (process.platform === 'win32' ? 'python' : 'python3') : process.execPath;
+        args = [serverPath];
       }
-
-      const command = isPy
-        ? process.platform === 'win32'
-          ? 'python'
-          : 'python3'
-        : process.execPath;
 
       const mcp = new Client({
         name: `mcp-client-${serverConfig.name}`,
@@ -63,7 +67,7 @@ class MCPClient {
 
       const transport = new StdioClientTransport({
         command,
-        args: [serverPath],
+        args,
       });
 
       mcp.connect(transport);
@@ -104,7 +108,8 @@ class MCPClient {
     const toolNames = allTools.map((tool) => tool.name);
     console.log('Available tools:', toolNames);
     const response = await this.anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      // model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-7-sonnet-20250219',
       max_tokens: 1000,
       messages,
       tools: allTools.map((tool) => ({
