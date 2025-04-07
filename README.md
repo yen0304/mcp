@@ -51,7 +51,7 @@ poetry self add poetry-plugin-shell
 cd mcp
 
 # 設定專案的 Python 版本
-pyenv local 3.10.13
+pyenv local 3.12
 
 # 初始化 Poetry 專案
 poetry init
